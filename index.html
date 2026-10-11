@@ -1203,18 +1203,14 @@ PENTING: Jangan pernah bersikap kasar atau merendahkan. Jangan gunakan kata "GAG
 
             let userContent;
 
-            // Logika Cerdas: Cek apakah ada file gambar yang diunggah
+           // Logika Cerdas: Cek apakah ada file gambar yang diunggah
             if (fileInput.files && fileInput.files[0]) {
-                // Jika ada gambar, PASTIKAN model yang dipilih adalah model Vision
-                if (!selectedModel.toLowerCase().includes("vision")) {
-                    alert("Untuk menganalisis gambar, Anda HARUS memilih model Vision dari Groq (contoh: llama-3.2-90b-vision-preview atau llama-3.2-11b-vision-preview). Silakan ganti model di menu atas!");
-                    return;
-                }
                 
                 try {
                     let file = fileInput.files[0];
                     let base64Data = await readFileAsBase64(file);
                     let mimeType = file.type || "image/jpeg";
+                
                     
                     userContent = [
                         { type: "text", text: algorithmicPrompt },
