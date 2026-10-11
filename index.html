@@ -1182,17 +1182,14 @@ Jika mahasiswa meminta rujukan, arahkan mereka spesifik ke penulis/buku dalam da
             let userNotes = document.getElementById(textAreaId).value;
             let exampleBox = document.getElementById(exampleBoxId);
 
-            let methodNames = {
+           let methodNames = {
                 'formal': 'Analisis Formal-Stilistik (berdasarkan prinsip H. Wölfflin: garis, bidang, komposisi, cahaya)',
                 'ikonografi': 'Analisis Ikonografi & Ikonologi (identifikasi simbol, atribut, dan konteks kultural/makna intrinsik Erwin Panofsky)',
                 'teknologi': 'Analisis Teknologi & Material (medium, teknik pembuatan, pigmen, struktur fisik)',
                 'komparatif': 'Analisis Komparatif (perbandingan silang gaya, bentuk, atau makna lintas periodisasi/budaya)'
             };
 
-            let algorithmicPrompt = `Sesuai dengan aturan mutlak IBL (Inquiry-Based Learning), bertindaklah sebagai ahli sejarah seni. 
-Mahasiswa meminta bantuan untuk metodologi: **${methodNames[methodType]}**.
-
-let algorithmicPrompt = `Anda adalah dosen pembimbing dan fasilitator akademik yang sangat ramah, suportif, dan ahli dalam Sejarah Seni. Mahasiswa sedang berada di Dimensi 2 dan mengunggah sebuah karya untuk dianalisis menggunakan metodologi: **${methodNames[methodType]}**.
+            let algorithmicPrompt = `Anda adalah dosen pembimbing dan fasilitator akademik yang sangat ramah, suportif, dan ahli dalam Sejarah Seni. Mahasiswa sedang berada di Dimensi 2 dan mengunggah sebuah karya untuk dianalisis menggunakan metodologi: **${methodNames[methodType]}**.
 
 TUGAS ANDA SECARA BERURUTAN (Gunakan nada bicara yang hangat, memotivasi, dan menghargai usaha mahasiswa):
 
@@ -1204,7 +1201,6 @@ TUGAS ANDA SECARA BERURUTAN (Gunakan nada bicara yang hangat, memotivasi, dan me
 PENTING: Jangan pernah bersikap kasar atau merendahkan. Jangan gunakan kata "GAGAL". Jadilah mentor yang membimbing langkah demi langkah.`;
 
             let userContent = [{ type: "text", text: algorithmicPrompt }];
-
             if (fileInput.files && fileInput.files[0]) {
                 try {
                     let file = fileInput.files[0];
