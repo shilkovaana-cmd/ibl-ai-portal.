@@ -1161,6 +1161,7 @@ Jika mahasiswa meminta rujukan, arahkan mereka spesifik ke penulis/buku dalam da
         }
 
         // ОБНОВЛЕННАЯ ФУНКЦИЯ ДЛЯ АНАЛИЗА С ФАЙЛАМИ (GROQ API С ПОДДЕРЖКОЙ VISION)
+      // ОБНОВЛЕННАЯ ФУНКЦИЯ ДЛЯ АНАЛИЗА С ФАЙЛАМИ (GROQ API С ПОДДЕРЖКОЙ VISION)
         async function analyzeWithAI(methodType) {
             const apiKey = document.getElementById('apiKey').value;
             const selectedModel = document.getElementById('modelSelect').value;
@@ -1194,26 +1195,38 @@ Jika mahasiswa meminta rujukan, arahkan mereka spesifik ke penulis/buku dalam da
 TUGAS ANDA SECARA BERURUTAN (Gunakan nada bicara yang hangat, memotivasi, dan menghargai usaha mahasiswa):
 
 1. APRESIASI & IDENTIFIKASI: Sapa mahasiswa dengan ramah. Apresiasi gambar yang mereka unggah. Identifikasi periode, peradaban, atau gaya visual dari karya tersebut.
-2. DEMONSTRASI ANALISIS (CONTOH NYATA DARI ANDA): Lakukan analisis yang terstruktur, jelas, dan poin-per-poin pada *gambar yang diunggah mahasiswa tersebut* menggunakan metodologi ${methodNames[methodType]}. Tunjukkan bagaimana cara menganalisisnya agar mahasiswa memiliki standar acuan yang baik.
+2. DEMONSTRASI ANALISIS (CONTOH NYATA DARI ANDA): Lakukan analisis yang terstruktur, jelas, dan poin-per-poin pada karya tersebut menggunakan metodologi ${methodNames[methodType]}. Tunjukkan bagaimana cara menganalisisnya agar mahasiswa memiliki standar acuan yang baik.
 3. KOSAKATA VISUAL (KONEKSI KE DIMENSI 4): Berdasarkan periode/gaya gambar tersebut, berikan daftar 3-4 istilah teknis atau karakteristik visual utama. Instruksikan mahasiswa: "Simpan dan gunakan istilah-istilah ini sebagai kata kunci (prompt) saat Anda mendesain atau merekonstruksi karya di Dimensi 4 (Virtual Exhibition) nanti."
-4. TUGAS SOKRATIK UNTUK MAHASISWA: Evaluasi sekilas catatan awal mahasiswa (jika ada): "${userNotes || 'Belum ada catatan awal'}". Berikan respons yang positif. Kemudian, berikan tugas lanjutan yang ringan: Mintalah mahasiswa untuk mencari SATU karya lain dari periode/gaya yang sama (atau dari gaya pembanding), dan mintalah mereka membalas di chat dengan analisis singkat (secara tesis/poin-poin) menggunakan cara yang baru saja Anda contohkan.
+4. TUGAS SOKRATIK UNTUK MAHASISWA: Evaluasi sekilas catatan awal mahasiswa (jika ada): "${userNotes || 'Belum ada catatan awal'}". Berikan respons yang positif. Kemudian, berikan tugas lanjutan yang ringan: Mintalah mahasiswa untuk mencari SATU karya lain dari periode/gaya yang sama (atau dari gaya pembanding), dan mintalah mereka membalas di chat dengan analisis singkat menggunakan cara yang baru saja Anda contohkan.
 
 PENTING: Jangan pernah bersikap kasar atau merendahkan. Jangan gunakan kata "GAGAL". Jadilah mentor yang membimbing langkah demi langkah.`;
 
-            let userContent = [{ type: "text", text: algorithmicPrompt }];
+            let userContent;
+
+            // Logika Cerdas: Cek apakah ada file gambar yang diunggah
             if (fileInput.files && fileInput.files[0]) {
+                // Jika ada gambar, PASTIKAN model yang dipilih adalah model Vision
+                if (!selectedModel.toLowerCase().includes("vision")) {
+                    alert("Untuk menganalisis gambar, Anda HARUS memilih model Vision dari Groq (contoh: llama-3.2-90b-vision-preview atau llama-3.2-11b-vision-preview). Silakan ganti model di menu atas!");
+                    return;
+                }
+                
                 try {
                     let file = fileInput.files[0];
                     let base64Data = await readFileAsBase64(file);
                     let mimeType = file.type || "image/jpeg";
                     
-                    userContent.push({
-                        type: "image_url",
-                        image_url: { url: `data:${mimeType};base64,${base64Data}` }
-                    });
+                    userContent = [
+                        { type: "text", text: algorithmicPrompt },
+                        { type: "image_url", image_url: { url: `data:${mimeType};base64,${base64Data}` } }
+                    ];
                 } catch (err) {
                     console.error("Gagal membaca file:", err);
+                    userContent = algorithmicPrompt; // Jika gagal baca file, kirim teks saja
                 }
+            } else {
+                // Jika tidak ada gambar yang diunggah, kirim sebagai string biasa agar API tidak error
+                userContent = algorithmicPrompt;
             }
 
             toggleChat();
@@ -1249,7 +1262,7 @@ PENTING: Jangan pernah bersikap kasar atau merendahkan. Jangan gunakan kata "GAG
 
                 const aiText = data.choices[0].message.content;
                 appendMessage('ai', aiText);
-                chatHistory.push({ role: 'user', text: `[Meminta bantuan analisis ${methodType} dengan lampiran file]` });
+                chatHistory.push({ role: 'user', text: `[Meminta bantuan analisis ${methodType}${fileInput.files[0] ? ' dengan lampiran file' : ''}]` });
                 chatHistory.push({ role: 'model', text: aiText });
 
                 exampleBox.style.display = 'block';
@@ -1259,7 +1272,7 @@ PENTING: Jangan pernah bersikap kasar atau merendahkan. Jangan gunakan kata "GAG
                 
             } catch (e) {
                 document.getElementById(loadingId).remove();
-                appendMessage('ai', "Koneksi gagal saat memproses file. Pastikan model yang dipilih mendukung visi (Vision) jika Anda mengirim gambar.");
+                appendMessage('ai', "Koneksi gagal. Pastikan Anda menggunakan model yang tepat dan terkoneksi internet.");
             }
         }
 
