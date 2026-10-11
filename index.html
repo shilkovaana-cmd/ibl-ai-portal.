@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IBL-AI: Portal Sejarah Seni</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <style>
         :root {
             --bg-color: #0b1528;
@@ -424,24 +424,24 @@
             #chat-widget { width: 90%; right: 5%; bottom: 10px; height: 400px; }
         }
 
-/* Добавление стилей для загрузки файлов и примеров в Д2 */
-.file-upload-box {
-    background: var(--bg-color);
-    border: 1px dashed var(--accent-cyan);
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    font-size: 0.85em;
-}
-.example-box {
-    background-color: rgba(176, 141, 91, 0.1);
-    border-left: 3px solid var(--accent-bronze);
-    padding: 10px;
-    margin-top: 8px;
-    font-size: 0.85em;
-    font-style: italic;
-    color: var(--text-main);
-}
+        /* Добавление стилей для загрузки файлов и примеров в Д2 */
+        .file-upload-box {
+            background: var(--bg-color);
+            border: 1px dashed var(--accent-cyan);
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 0.85em;
+        }
+        .example-box {
+            background-color: rgba(176, 141, 91, 0.1);
+            border-left: 3px solid var(--accent-bronze);
+            padding: 10px;
+            margin-top: 8px;
+            font-size: 0.85em;
+            font-style: italic;
+            color: var(--text-main);
+        }
     </style>
 </head>
 <body>
@@ -543,67 +543,67 @@
                 </div>
 
                <div class="grid-2x2">
-    <!-- 1. Формально-стилистический -->
-    <div class="widget">
-        <h3>1. Analisis Formal-Stilistik</h3>
-        <div class="file-upload-box">
-            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Karya/Gambar:</label>
-            <input type="file" id="file-formal" accept="image/*" style="width: 100%; margin-top: 5px;">
-        </div>
-        <div class="input-group">
-            <label>Catatan Analisis:</label>
-            <textarea id="analisis-formal" placeholder="Tuliskan hasil analisis formal di sini..."></textarea>
-        </div>
-        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('formal')">Minta Analisis & Contoh Sokratik (AI)</button>
-        <div id="example-formal" class="example-box" style="display:none;"></div>
-    </div>
+                    <!-- 1. Формально-стилистический -->
+                    <div class="widget">
+                        <h3>1. Analisis Formal-Stilistik</h3>
+                        <div class="file-upload-box">
+                            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Karya/Gambar:</label>
+                            <input type="file" id="file-formal" accept="image/*" style="width: 100%; margin-top: 5px;">
+                        </div>
+                        <div class="input-group">
+                            <label>Catatan Analisis:</label>
+                            <textarea id="analisis-formal" placeholder="Tuliskan hasil analisis formal di sini..."></textarea>
+                        </div>
+                        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('formal')">Minta Analisis & Contoh Sokratik (AI)</button>
+                        <div id="example-formal" class="example-box" style="display:none;"></div>
+                    </div>
 
-    <!-- 2. Ikonografi & Ikonologi -->
-    <div class="widget">
-        <h3>2. Analisis Ikonografi & Ikonologi</h3>
-        <div class="file-upload-box">
-            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Sumber Visual/Teks:</label>
-            <input type="file" id="file-ikonografi" accept="image/*,.pdf,.txt" style="width: 100%; margin-top: 5px;">
-        </div>
-        <div class="input-group">
-            <label>Catatan Analisis:</label>
-            <textarea id="analisis-ikonografi" placeholder="Identifikasi simbol dan interpretasi maknanya..."></textarea>
-        </div>
-        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('ikonografi')">Minta Analisis & Contoh Sokratik (AI)</button>
-        <div id="example-ikonografi" class="example-box" style="display:none;"></div>
-    </div>
+                    <!-- 2. Ikonografi & Ikonologi -->
+                    <div class="widget">
+                        <h3>2. Analisis Ikonografi & Ikonologi</h3>
+                        <div class="file-upload-box">
+                            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Sumber Visual/Teks:</label>
+                            <input type="file" id="file-ikonografi" accept="image/*,.pdf,.txt" style="width: 100%; margin-top: 5px;">
+                        </div>
+                        <div class="input-group">
+                            <label>Catatan Analisis:</label>
+                            <textarea id="analisis-ikonografi" placeholder="Identifikasi simbol dan interpretasi maknanya..."></textarea>
+                        </div>
+                        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('ikonografi')">Minta Analisis & Contoh Sokratik (AI)</button>
+                        <div id="example-ikonografi" class="example-box" style="display:none;"></div>
+                    </div>
 
-    <!-- 3. Teknologi -->
-    <div class="widget">
-        <h3>3. Analisis Teknologi</h3>
-        <div class="file-upload-box">
-            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Detail Material/Struktur:</label>
-            <input type="file" id="file-teknologi" accept="image/*" style="width: 100%; margin-top: 5px;">
-        </div>
-        <div class="input-group">
-            <label>Catatan Analisis:</label>
-            <textarea id="analisis-teknologi" placeholder="Analisis material dan teknik pembuatan karya..."></textarea>
-        </div>
-        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('teknologi')">Minta Analisis & Contoh Sokratik (AI)</button>
-        <div id="example-teknologi" class="example-box" style="display:none;"></div>
-    </div>
+                    <!-- 3. Teknologi -->
+                    <div class="widget">
+                        <h3>3. Analisis Teknologi</h3>
+                        <div class="file-upload-box">
+                            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Detail Material/Struktur:</label>
+                            <input type="file" id="file-teknologi" accept="image/*" style="width: 100%; margin-top: 5px;">
+                        </div>
+                        <div class="input-group">
+                            <label>Catatan Analisis:</label>
+                            <textarea id="analisis-teknologi" placeholder="Analisis material dan teknik pembuatan karya..."></textarea>
+                        </div>
+                        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('teknologi')">Minta Analisis & Contoh Sokratik (AI)</button>
+                        <div id="example-teknologi" class="example-box" style="display:none;"></div>
+                    </div>
 
-    <!-- 4. Komparatif -->
-    <div class="widget">
-        <h3>4. Analisis Komparatif</h3>
-        <div class="file-upload-box">
-            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Karya Pembanding:</label>
-            <input type="file" id="file-komparatif" accept="image/*" style="width: 100%; margin-top: 5px;">
-        </div>
-        <div class="input-group">
-            <label>Catatan Analisis:</label>
-            <textarea id="analisis-komparatif" placeholder="Bandingkan karya ini dengan gaya dari periode lain..."></textarea>
-        </div>
-        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('komparatif')">Minta Analisis & Contoh Sokratik (AI)</button>
-        <div id="example-komparatif" class="example-box" style="display:none;"></div>
-    </div>
-</div>
-<div class="content-box" style="margin-top: 20px; text-align: center;">
+                    <!-- 4. Komparatif -->
+                    <div class="widget">
+                        <h3>4. Analisis Komparatif</h3>
+                        <div class="file-upload-box">
+                            <label style="font-size: 0.8em; color: var(--accent-cyan);">Unggah Karya Pembanding:</label>
+                            <input type="file" id="file-komparatif" accept="image/*" style="width: 100%; margin-top: 5px;">
+                        </div>
+                        <div class="input-group">
+                            <label>Catatan Analisis:</label>
+                            <textarea id="analisis-komparatif" placeholder="Bandingkan karya ini dengan gaya dari periode lain..."></textarea>
+                        </div>
+                        <button class="action-btn" style="width: 100%;" onclick="analyzeWithAI('komparatif')">Minta Analisis & Contoh Sokratik (AI)</button>
+                        <div id="example-komparatif" class="example-box" style="display:none;"></div>
+                    </div>
+                </div>
+                <div class="content-box" style="margin-top: 20px; text-align: center;">
                     <h3 style="color: var(--accent-cyan);">Simpan Laporan Analisis</h3>
                     <p>Catatan analisis Anda akan disalin otomatis ke sini sebelum diunduh.</p>
                     <textarea id="logDim2" style="width: 100%; height: 120px; background: var(--bg-color); color: var(--text-main); border: 1px solid var(--border-color); padding: 10px; margin-bottom: 10px;" placeholder="Ringkasan analisis akan muncul di sini..."></textarea>
